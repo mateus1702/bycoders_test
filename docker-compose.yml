@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  mssql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+        ACCEPT_EULA: "Y"
+        SA_PASSWORD: "senhadificil.123"
+        MSSQL_PID: Express
+    ports:
+        - "1433:1433"
+
+  netcorewebapi:
+    image: ${DOCKER_REGISTRY-}netcorewebapi
+    build:
+      context: .
+      dockerfile: backend/hosting/netcorewebapi/Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - mssql-server
+
+  aspnetmvc:
+    image: ${DOCKER_REGISTRY-}aspnetmvc
+    build:
+      context: .
+      dockerfile: frontend/aspnetmvc/Dockerfile
+    ports:
+      - 8001:80
+    depends_on:
+      - netcorewebapi
