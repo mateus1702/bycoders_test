@@ -104,36 +104,17 @@ namespace netcorewebapi.Controllers
             }
         }
 
-        // GET: api/<ValuesController>
         [HttpGet]
         public async Task<ListarLojasResponse> Get()
         {
             return await LojaService.ListarLojas(new lojaServiceContract.DTO.ListarLojasRequest());
         }
 
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost("listar_transacoes")]
+        public async Task<ListarTransacoesResponse> ListarTransacoes(ListarTransacoesRequest request)
         {
-            return "value";
+            return await LojaService.ListarTransacoes(request);
         }
 
-        // POST api/<ValuesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

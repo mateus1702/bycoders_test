@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>Listagem de lojas</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Nome do representante</th>
+            <th width="220px">Ações</th>
+        </tr>
+        <tr *ngFor="let loja of lojas">
+            <td>{{ loja.id }}</td>
+            <td>{{ loja.nome }}</td>
+            <td>{{ loja.nomeRepresentante }}</td>
+            <td>
+                <a href="#" [routerLink]="['/transacoes/', loja.id]" class="btn btn-info">Visualizar transações</a>
+            </td>
+        </tr>
+    </table>
+</div>

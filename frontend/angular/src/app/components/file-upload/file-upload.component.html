@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="file-input">
+		<input type="file" id="file" class="file" (change)="onChange($event)" accept=".txt">
+		<label for="file">Selecionar o arquivo</label>
+	</div>
+
+	<div *ngIf="arquivo">
+		<h3>{{arquivo}}</h3>
+	</div>
+
+	<button (click)="onUpload()" class="button">
+		Enviar
+	</button>
+</div>
+
+<div class="container">
+	<div *ngIf="loading">
+		<h3>Processando ...</h3>
+	</div>
+
+	<div *ngIf="mensagem">
+		<h3>{{mensagem}}</h3>
+	</div>
+</div>
+
+<div class="container" *ngIf="relatorio.length > 0">
+	<h1>Relatório de processamento</h1>
+	<table>
+		<tr *ngFor="let linha of relatorio">
+			<td>{{ linha }}</td>
+		</tr>
+	</table>
+</div>

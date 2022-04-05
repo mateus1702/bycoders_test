@@ -1,0 +1,24 @@
+<div class="container">
+    <h1>Transações</h1>
+    <h2>Saldo {{saldo | number}}</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tipo de transação</th>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>CPF</th>
+            <th>Número do cartão</th>
+            <th>Nome da loja</th>
+        </tr>
+        <tr *ngFor="let transacao of transacoes">
+            <td>{{ transacao.id }}</td>
+            <td>{{ transacao.tipoDeTransacao }}</td>
+            <td>{{ transacao.dataFormatada }}</td>
+            <td>{{ transacao.valor | number}}</td>
+            <td>{{ transacao.cpf }}</td>
+            <td>{{ transacao.numeroCartao }}</td>
+            <td>{{ transacao.nomeLoja }}</td>
+        </tr>
+    </table>
+</div>

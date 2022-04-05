@@ -19,20 +19,33 @@ namespace lojaService
 
         public async Task<ListarLojasResponse> ListarLojas(ListarLojasRequest request)
         {
-            var response = new ListarLojasResponse()
+            try
             {
-                Success = true
-            };
+                var response = new ListarLojasResponse()
+                {
+                    Success = true
+                };
 
-            var lojas = await DbContext.Lojas.ToListAsync();
+                var lojas = await DbContext.Lojas.ToListAsync();
 
-            response.Lojas = lojas.Select(x => new ListarLojasResponse.Loja()
+                response.Lojas = lojas.Select(x => new ListarLojasResponse.Loja()
+                {
+                    Id = x.Id,
+                    Nome = x.Nome,
+                    NomeRepresentante = x.NomeRepresentante
+                });
+
+                return response;
+
+            }
+            catch (Exception ex)
             {
-                Id = x.Id,
-                Nome = x.Nome
-            });
-
-            return response;
+                return new ListarLojasResponse()
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
         }
 
         public async Task<ProcessarTransacaoResponse> ProcessarTransacao(ProcessarTransacaoRequest request)
@@ -109,6 +122,60 @@ namespace lojaService
                 return "Campos obrigatórios não preenchidos";
             else
                 return string.Empty;
+        }
+
+        public async Task<ListarTransacoesResponse> ListarTransacoes(ListarTransacoesRequest request)
+        {
+            try
+            {
+                var loja = await DbContext.Lojas.FirstOrDefaultAsync(x => x.Id == request.LojaId);
+                if (loja == null)
+                {
+                    return new ListarTransacoesResponse()
+                    {
+                        Success = false,
+                        Message = "Loja não encontrada."
+                    };
+                }
+
+                var response = new ListarTransacoesResponse()
+                {
+                    Success = true
+                };
+
+                var transacoes = await DbContext.Transacoes
+                    .Include(x => x.Cliente)
+                    .Include(x => x.Loja)
+                    .Include(x => x.TipoDeTransacao)
+                    .Where(x => x.Loja.Id == request.LojaId).ToListAsync();
+
+                response.Transacoes = transacoes.Select(x => new ListarTransacoesResponse.Transacao()
+                {
+                    Id = x.Id,
+                    CPF = x.Cliente.CPF,
+                    DataFormatada = x.Data.ToString("yyyy/MM/dd HH:mm"),
+                    NomeLoja = x.Loja.Nome,
+                    NumeroCartao = x.NumeroCartao,
+                    TipoDeTransacao = x.TipoDeTransacao.Descricao,
+                    Valor = x.Valor
+                });
+
+                response.Saldo = transacoes.Sum((x) =>
+                {
+                    return x.TipoDeTransacao.Entrada ? x.Valor : x.Valor * -1;
+                });
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                return new ListarTransacoesResponse()
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
         }
     }
 }
