@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class FileUploadService {
 
   // API url
-  baseApiUrl = "https://file.io"
+  baseApiUrl = "http://localhost:5000/api/loja/upload";
 
   constructor(private http: HttpClient) { }
 

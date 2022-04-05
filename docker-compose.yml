@@ -18,14 +18,4 @@ services:
     ports:
       - 5000:5000
     depends_on:
-      - mssql-server
-
-  aspnetmvc:
-    image: ${DOCKER_REGISTRY-}aspnetmvc
-    build:
-      context: .
-      dockerfile: frontend/aspnetmvc/Dockerfile
-    ports:
-      - 8001:80
-    depends_on:
-      - netcorewebapi
+      - mssql-server  

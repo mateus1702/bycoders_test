@@ -1,12 +1,13 @@
 ﻿using lojaServiceContract.DTO;
 using System;
+using System.Threading.Tasks;
 
 namespace lojaServiceContract
 {
     public interface ILojaService
     {
-        public AdicionarLojaResponse AdicionarLoja(AdicionarLojaRequest request);
+        public Task<ListarLojasResponse> ListarLojas(ListarLojasRequest request);
 
-        public ListarLojasResponse ListarLojas(ListarLojasRequest request);
+        public Task<ProcessarTransacaoResponse> ProcessarTransacao(ProcessarTransacaoRequest request);
     }
 }

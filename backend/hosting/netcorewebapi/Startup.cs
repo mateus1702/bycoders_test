@@ -22,9 +22,22 @@ namespace netcorewebapi
 
         public IConfiguration Configuration { get; }
 
+        readonly string CorsPolicy = "_corsPolicy";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: CorsPolicy,
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                          .AllowAnyMethod()
+                                          .AllowAnyHeader();
+                                  });
+            });
+
             services.AddControllers();
 
             services.AddScoped<lojaService.LojaContext>();
@@ -47,6 +60,8 @@ namespace netcorewebapi
             }
 
             app.UseRouting();
+
+            app.UseCors(CorsPolicy);
 
             app.UseAuthorization();
 

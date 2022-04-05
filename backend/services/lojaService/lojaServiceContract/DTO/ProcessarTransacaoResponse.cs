@@ -4,7 +4,7 @@ using System.Text;
 
 namespace lojaServiceContract.DTO
 {
-    public class AdicionarLojaResponse : BaseResponse
+    public class ProcessarTransacaoResponse : BaseResponse
     {
     }
 }
