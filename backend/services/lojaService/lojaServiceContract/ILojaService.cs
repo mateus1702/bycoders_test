@@ -8,7 +8,7 @@ namespace lojaServiceContract
     {
         public Task<ListarLojasResponse> ListarLojas(ListarLojasRequest request);
 
-        public Task<ProcessarTransacaoResponse> ProcessarTransacao(ProcessarTransacaoRequest request);
+        public Task<ProcessarTransacoesResponse> ProcessarTransacoes(ProcessarTransacoesRequest request);
 
         public Task<ListarTransacoesResponse> ListarTransacoes(ListarTransacoesRequest request);
     }

@@ -8,6 +8,12 @@ namespace lojaService
 {
     public class LojaContext : DbContext
     {
+        protected LojaContext(DbContextOptions options) : base(options) { }
+
+        public LojaContext(DbContextOptions<LojaContext> options) : this((DbContextOptions)options)
+        {
+        }
+
         public DbSet<Loja> Lojas { get; set; }
 
         public DbSet<TipoDeTransacao> TiposDeTransacao { get; set; }
@@ -15,16 +21,6 @@ namespace lojaService
         public DbSet<Cliente> Clientes { get; set; }
 
         public DbSet<Transacao> Transacoes { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-
-            var connectionString = $"Server=mssql-server, 1433;Initial Catalog=bycoders;User ID=SA;Password=senhadificil.123";
-
-            optionsBuilder.UseSqlServer(connectionString);
-        }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

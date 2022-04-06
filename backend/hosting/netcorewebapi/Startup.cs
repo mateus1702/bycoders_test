@@ -2,6 +2,7 @@ using lojaService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -40,7 +41,9 @@ namespace netcorewebapi
 
             services.AddControllers();
 
-            services.AddScoped<lojaService.LojaContext>();
+            var connectionString = $"Server=mssql-server, 1433;Initial Catalog=bycoders;User ID=SA;Password=senhadificil.123";
+
+            services.AddDbContext<LojaContext>(opt => opt.UseSqlServer(connectionString),ServiceLifetime.Scoped,ServiceLifetime.Scoped);
 
             services.AddScoped<lojaServiceContract.ILojaService,lojaService.LojaService>();
         }

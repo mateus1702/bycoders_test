@@ -8,7 +8,7 @@ namespace lojaServiceContract.DTO
     {
         public class Loja
         {
-            public long Id { get; set; }
+            public int Id { get; set; }
 
             public string Nome { get; set; }
 

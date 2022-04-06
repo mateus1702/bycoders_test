@@ -4,7 +4,8 @@ using System.Text;
 
 namespace lojaServiceContract.DTO
 {
-    public class ProcessarTransacaoResponse : BaseResponse
+    public class ProcessarTransacoesResponse : BaseResponse
     {
+        public List<string> RelatorioParser { get; set; }
     }
 }
