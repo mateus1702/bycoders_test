@@ -8,6 +8,7 @@ Docker, Docker compose
 ### 🔧 Instalação
 
 No diretório raiz execute o comando
+
     docker-compose up
 
 
@@ -35,8 +36,10 @@ Acesse a url abaixo para visualizar a documentação da API, nela esta contida o
 ## ⚙️ Executando os testes
 
 No diretorio raiz execute o comando
+
     cd backend\tests\servicesTests
 Em seguida execute o comando
+
     dotnet test
 
 
