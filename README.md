@@ -22,7 +22,7 @@ Visualize as lojas, os saldos das lojas e as transações de cada loja na seçã
 
 ## 📋 Documentação da API
 
-Acesse as urls abaixo para visualizar a documentação da API, nela esta contida os endereços dos endpoints para consumo e a descrição dos DTO de envio e retorno de cada método.
+Acesse a url abaixo para visualizar a documentação da API, nela esta contida os endereços dos endpoints para consumo e a descrição dos DTO de envio e retorno de cada método.
     Swagger UI: http://localhost:5000/swagger/index.html
    
 
@@ -34,8 +34,9 @@ Acesse as urls abaixo para visualizar a documentação da API, nela esta contida
 
 ## ⚙️ Executando os testes
 
-No diretorio raiz execute os comandos
+No diretorio raiz execute o comando
     cd backend\tests\servicesTests
+Em seguida execute o comando
     dotnet test
 
 
